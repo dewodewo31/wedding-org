@@ -1,16 +1,30 @@
 import type { Config } from "tailwindcss";
 
+const colors = {
+  color1: "#5C2D2D",
+  color2: "#FF48B6",
+  color3: "#FFA740",
+  color4: "#07B704",
+  dark1: "#000000",
+  light1: "#ffffff",
+  light2: "#F7F7F9",
+  light3: "#E4E6EB",
+};
+
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/assets/images/*.svg",
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        ...colors,
+      },
+      fill: { ...colors },
+      fontFamily: {
+        sans: ["'Poppins', sans-serif"],
       },
     },
   },
