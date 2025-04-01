@@ -31,6 +31,59 @@ type Tpackage = {
   weddingOrganizer: TOrganizer
 }
 
+function WeddingPackageGrid({data}: {data: Tpackage[]}){
+  return (
+  <div className="grid grid-cols-4 gap-7">
+    {
+      data.map(gridPackage => {
+        return <div key={gridPackage.id} className="flex flex-col gap-y-4 relative">
+        <Link href={`${process.env.HOST_APP}/packages/${gridPackage.slug}`} className="absolute inset-0 z-10">
+        </Link>
+        <span className="relative h-[300px] rounded-3xl overflow-hidden">
+          {gridPackage.isPopular === 1 && (
+          
+          <span className="absolute z-10 top-5 left-5">
+            <span
+              className="bg-color1 rounded-full text-light1 inline-flex gap-x-2 items-center text-sm py-1 px-3 uppercase"
+            >
+              <Popular/>
+              Popular
+            </span>
+          </span>
+          )}
+          <Image
+            fill
+              className="w-full h-full object-cover object-center"
+              src={`http://127.0.0.1:8000/storage/${gridPackage.thumbnail}`}
+              alt={gridPackage.name}
+              sizes="(max-width: 768px) 100vw"
+            />
+        </span>
+        <h6 className="text-xl font-bold">
+          {gridPackage.name}
+        </h6>
+        <span className="flex flex-col gap-[14px]">
+          <span className="flex gap-x-2 items-center">
+            <Pinpoint/>
+            {gridPackage.city.name}
+            </span>
+          {/* <span className="flex gap-x-2 items-center">
+            Tentram
+            </span> */}
+        </span>
+        <span className="text-color2 font-bold">Rp {
+          thousands(gridPackage.price)
+          }</span>
+      </div>
+      })
+    }
+  </div>
+
+  );  
+}
+
+
+
 function WeddingPackageSlider({data}: {data: Tpackage[]}){
   console.log(data)
   return (
@@ -94,10 +147,8 @@ function WeddingPackageSlider({data}: {data: Tpackage[]}){
 async function WeddingPackagesWrapper({show, type}: PropsWeddingPackagesWrapper) {
   const {data}: {data: Tpackage[]} = await getData(show)
 
-  console.log(data)
-
   if(type === "grid"){
-    return <div className="">Grid</div>
+    return <WeddingPackageGrid data={data}/>
   } 
   if(type === "slider"){
     return <WeddingPackageSlider data={data} />
