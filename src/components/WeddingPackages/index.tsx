@@ -31,13 +31,13 @@ type Tpackage = {
   weddingOrganizer: TOrganizer
 }
 
-function WeddingPackageGrid({data}: {data: Tpackage[]}){
+export function WeddingPackageGrid({data}: {data: Tpackage[]}){
   return (
   <div className="grid grid-cols-4 gap-7">
     {
       data.map(gridPackage => {
         return <div key={gridPackage.id} className="flex flex-col gap-y-4 relative">
-        <Link href={`${process.env.HOST_APP}/packages/${gridPackage.slug}`} className="absolute inset-0 z-10">
+        <Link href={`/packages/${gridPackage.slug}`} className="absolute inset-0 z-10">
         </Link>
         <span className="relative h-[300px] rounded-3xl overflow-hidden">
           {gridPackage.isPopular === 1 && (
@@ -84,7 +84,7 @@ function WeddingPackageGrid({data}: {data: Tpackage[]}){
 
 
 
-function WeddingPackageSlider({data}: {data: Tpackage[]}){
+export function WeddingPackageSlider({data}: {data: Tpackage[]}){
   console.log(data)
   return (
     <div className="relative">

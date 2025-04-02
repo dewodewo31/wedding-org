@@ -17,7 +17,7 @@ function Header({}: Props) {
   ];
 
   return (
-    <header className="flex justify-between container mx-auto items-center pt-8 -mb-8">
+    <header className="flex justify-between max-w-[1200px] w-full mx-auto items-center pt-8 -mb-8">
       <span className="flex gap-x-3 items-center">
         <span className="text-color2">
           <Logo />
