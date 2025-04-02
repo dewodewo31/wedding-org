@@ -63,7 +63,7 @@ function WeddingPackageGrid({data}: {data: Tpackage[]}){
           {gridPackage.name}
         </h6>
         <span className="flex flex-col gap-[14px]">
-          <span className="flex gap-x-2 items-center">
+          <span className="flex gap-x-2 items-center text-color1">
             <Pinpoint/>
             {gridPackage.city.name}
             </span>

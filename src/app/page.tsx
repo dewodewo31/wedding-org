@@ -5,6 +5,7 @@ import Creditcard from "@/app/assets/images/creditcard.svg";
 import Place from "@/app/assets/images/place.svg";
 import Link from "next/link";
 import Cities from "@/components/Cities";
+import Testimonial from "@/components/Testimonials";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
         <WeddingPackages show="popular" type="slider" />
       </section>
 
-      <section className="container mx-auto flex flex-col">
+      <section className="container mx-auto max-w-[1200px] flex flex-col px-6">
         <h2 className="text-3xl font-bold max-w-md mx-auto text-center mb-8">
           Alasan Mereka Memilih WeddingOrg
         </h2>
@@ -77,7 +78,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container mx-auto flex flex-col">
+      <section className="container mx-auto max-w-[1400px] flex flex-col px-6">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold max-w-sm">
             Our Latest & Best Wedding Packages
@@ -107,6 +108,19 @@ export default function Home() {
           </div>
           <Cities/>
         </div>
+      </section>
+
+      <section className="container mx-auto max-w-[1400px] flex flex-col px-6">
+        <div className="container mx-auto flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold max-w-xs">
+            Happy Stories of Our Wedding
+          </h2>
+          <Link
+            href={`${process.env.HOST_APP}/testimonials`}
+            className="border border-dark1 px-5 py-3 text-center rounded-full font-semibold"
+            >Explore All</Link>
+        </div>
+        <Testimonial />
       </section>
     </main>
   );
