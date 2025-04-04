@@ -5,7 +5,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import Star from "@/app/assets/images/star.svg";
 import Check from "@/app/assets/images/check.svg";
 import Pinpoint from "@/app/assets/images/pinpoin.svg";
-import Popular from "@/app/assets/images/popular.svg";
+
 import React from "react";
 import thousands from "@/libs/thousands";
 import Link from "next/link";
@@ -19,7 +19,7 @@ type Request = {
   };
 };
 
-async function getData(slug: string) {
+export async function getData(slug: string) {
   try {
     const req = await fetch(
       `${process.env.HOST_API}/api/wedding-package/${slug}`,

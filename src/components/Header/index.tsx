@@ -5,9 +5,11 @@ import Logo from "@/app/assets/images/logo.svg";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-type Props = {}
+type Props = {
+  hasPadding?: boolean
+}
 
-function Header({}: Props) {
+function Header({ hasPadding }: Props) {
   const pathName = usePathname();
   const mainMenus = [
     { key: "homepage", label: "Home", slug: "/" },
@@ -17,7 +19,7 @@ function Header({}: Props) {
   ];
 
   return (
-    <header className="flex justify-between max-w-[1200px] w-full mx-auto items-center pt-8 -mb-8">
+    <header className={["flex justify-between max-w-[1200px] w-full mx-auto items-center", hasPadding ? "p-5 bg-white rounded-2xl" : ""].join(" pt-8 -mb-8 ")}>
       <span className="flex gap-x-3 items-center">
         <span className="text-color2">
           <Logo />
