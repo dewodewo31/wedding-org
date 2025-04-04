@@ -1,6 +1,6 @@
 "use client"
 
-import { useLayoutEffect } from "react";
+import { ReactNode, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 
 
@@ -17,9 +17,11 @@ export function PreventScrolling(){
   return null
 }
 
-export function RouterBack(){
+export function RouterBack({className, children}: {className?: string, children?: ReactNode}){
 
   const router = useRouter();
 
-  return <div className="absolute inset-0 z-10 cursor-pointer" onClick={router.back}></div>
+  return <div className={[className ? className : "absolute inset-0 z-10 cursor-pointer"].join(" ")} onClick={router.back}>
+    {children}
+  </div>
 }

@@ -1,15 +1,21 @@
+"use client";
 import React from "react";
 import { Tbonus } from "./type";
 import Image from "next/image";
 import Link from "next/link";
 import thousands from "@/libs/thousands";
+import { useParams } from "next/navigation";
+import useQueryParams from "@/libs/useQueryParams";
 
 type TPropsContent = {
   data: Tbonus;
+  slugPackage?: string;
 };
 
-export function Content({ data }: TPropsContent) {
-  
+export function Content({ data, slugPackage }: TPropsContent) {
+  const params = useParams();
+
+  const queryParams = useQueryParams();
   return (
     <div className="flex border p-5 gap-x-5 rounded-2xl items-center">
       <span className="flex w-44 aspect-video relative rounded-2xl overflow-hidden">
@@ -22,9 +28,7 @@ export function Content({ data }: TPropsContent) {
         />
       </span>
       <div className="flex flex-col">
-        <h6 className="text-xl font-bold">
-          {data.name}
-        </h6>
+        <h6 className="text-xl font-bold">{data.name}</h6>
         <span className="flex gap-x-2">
           <span className="text-color2">
             <span className="font-semibold"> Rp 0 </span>
@@ -34,7 +38,17 @@ export function Content({ data }: TPropsContent) {
         </span>
       </div>
       <Link
-        href=""
+      scroll={
+        false
+      }
+        href={{
+          query: {
+            ...queryParams,
+            modal: "bonus",
+            bonusId: data.id,
+            slugPackage: params.slugPackage || slugPackage,
+          },
+        }}
         className="border ml-auto border-dark1 px-5 py-3 rounded-full font-semibold"
       >
         View Details

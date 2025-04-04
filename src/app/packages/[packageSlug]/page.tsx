@@ -11,6 +11,7 @@ import thousands from "@/libs/thousands";
 import Link from "next/link";
 import Slides from "./slide";
 import { Content as ContentBonus } from "@/components/Bonus";
+import { Content as ContentOrganizer } from "@/components/Organizer";
 
 type Request = {
   params: {
@@ -55,8 +56,6 @@ async function packageDetailPage({ params }: Request) {
   const { data: details }: { data: Tpackage } = await getData(
     params.packageSlug
   );
-  console.log(details);
-  console.log(details.weddingBonusPackages); // Pastikan weddingBonusPackages ada dan berupa array
 
   return (
     <main className="flex flex-col gap-y-8 relative pb-16">
@@ -106,7 +105,11 @@ async function packageDetailPage({ params }: Request) {
                 <h6 className="font-bold text-xl">Bonus Included</h6>
                 {details.weddingBonusPackages.length > 0 ? (
                   details.weddingBonusPackages.map(bonus => (
-                    <ContentBonus key={bonus.id} data={bonus.bonusPackage} />
+                    <ContentBonus
+                      slugPackage={details.slug}
+                      key={bonus.id}
+                      data={bonus.bonusPackage}
+                    />
                   ))
                 ) : (
                   <p className="text-gray-500 text-center">
@@ -168,27 +171,8 @@ async function packageDetailPage({ params }: Request) {
                   </li>
                 </ul>
                 <hr />
-                {/* <h6 className="font-bold">Wedding Organizer</h6>
-                <div
-                  className="flex border border-light3 hover:border-color2 transition-colors duration-300 bg-light1 p-5 rounded-3xl items-center gap-x-5 relative"
-                >
-                  <span
-                    className="relative w-[80px] aspect-square rounded-full overflow-hidden"
-                  >
-                    <img
-                      src="/images/image 5.png"
-                      alt="wedding 2"
-                      className="w-full h-full object-cover absolute"
-                    />
-                  </span>
-                  <span className="flex flex-col">
-                    <span className="text-xl font-bold">Dian Putri</span>
-                    <span className="">194 Packages</span>
-                  </span>
-                  <a href="/organizers.html" className="absolute inset-0">
-                    <!-- link here -->
-                  </a>
-                </div> */}
+                <h6 className="font-bold">Wedding Organizer</h6>
+                <ContentOrganizer data={details.weddingOrganizer} />
                 <hr />
                 <Link
                   href={`${process.env.HOST_APP}/packages/${details.slug}/checkout`}
