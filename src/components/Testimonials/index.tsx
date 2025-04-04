@@ -8,53 +8,52 @@ import Star from "@/app/assets/images/star.svg";
 
 import Image from "next/image";
 
-
+// Komponen untuk menampilkan satu testimonial
 export function Content({ data }: { data: Ttestimonial }) {
   return (
     <div className="flex flex-col border p-7 rounded-3xl gap-y-4">
-        <div className="flex flex-col gap-y-4">
-          <span className="flex gap-x-1 text-color3">
-            <Star />
-            <Star />
-            <Star />
-            <Star />
-            <Star />
-          </span>
+      <div className="flex flex-col gap-y-4">
+        <span className="flex gap-x-1 text-color3">
+          <Star />
+          <Star />
+          <Star />
+          <Star />
+          <Star />
+        </span>
 
-          <p className="">{data.message}</p>
+        <p className="">{data.message}</p>
 
-          <span className="flex gap-x-4 items-center">
-            <span className="relative w-[80px] aspect-square rounded-full overflow-hidden">
-              <Image
-                fill
-                className="w-full h-full object-cover object-center"
-                src={`http://127.0.0.1:8000/storage/${data.photo}`}
-                alt={data.name}
-                sizes="(max-width: 768px) 100vw"
-              />
-            </span>
-            <span className="flex flex-col">
-              <span className="text-xl font-bold">{data.name}</span>
-              <span className="text-sm text-gray-500">
-                {data.occupation}
-              </span>
-            </span>
+        <span className="flex gap-x-4 items-center">
+          <span className="relative w-[80px] aspect-square rounded-full overflow-hidden">
+            <Image
+              fill
+              className="w-full h-full object-cover object-center"
+              src={`http://127.0.0.1:8000/storage/${data.photo}`}
+              alt={data.name}
+              sizes="(max-width: 768px) 100vw"
+            />
           </span>
-        </div>
-      
+          <span className="flex flex-col">
+            <span className="text-xl font-bold">{data.name}</span>
+            <span className="text-sm text-gray-500">{data.occupation}</span>
+          </span>
+        </span>
+      </div>
     </div>
   );
 }
 
+// Fungsi utama untuk mengambil dan menampilkan daftar testimonial
 async function Testimonial() {
+  // Pastikan tipe data yang diterima adalah array
   const { data }: { data: Ttestimonial[] } = await getData();
 
   return (
     <div className="relative pb-16">
       <Slider swiperClassName="w-full" swiperSliderClassName="!w-[340px] -mx-2 px-6">
-        {data.map(testi => {
-          return <Content key={testi.id} data={data} />;
-        })}
+        {data.map((testimonial) => (
+          <Content key={testimonial.id} data={testimonial} />
+        ))}
       </Slider>
     </div>
   );
