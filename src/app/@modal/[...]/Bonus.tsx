@@ -9,7 +9,6 @@ type Props = {
   slugPackage: string
 
 }
-
 async function getData(slug: string) {
   try {
     const req = await fetch(
